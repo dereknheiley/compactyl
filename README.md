@@ -3,9 +3,12 @@
 This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manuform-tight) of the [l4u fork](https://github.com/l4u/dactyl-manuform-mini-keyboard) of the [tshort fork](https://github.com/tshort/dactyl-keyboard) of the [Dactyl](https://github.com/adereth/dactyl-keyboard), a parameterized, split-hand, concave, columnar, ergonomic keyboard.
 
 ## Future TODOs
-- TODO explore raising thumb cluster by 5mm to accomodate thumb clearing case with shorter DSA keycaps
 - TODO add ready to print risers with slots to increase palm rest height
 - TODO confirm bastardkb mcu holder is compatible with blackpill version as well
+
+## V6.0 (IN PROGRESS) Features
+- adjust thumb height/angle and curvature
+![Compactyl V6.0 preview](images/compactyl-v6.png)
 
 ## V5.0 Features
 - Added fourth thumb key
