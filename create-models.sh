@@ -7,7 +7,7 @@ OPEN_SCAD='/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD'
 # OPEN_SCAD='openscad.com'
 
 INPUTDIR='things'
-OUTPUTDIR='things/compactyl-v5.0-5x6-hotswap'
+OUTPUTDIR='things/compactyl-v6.0-5x6-hotswap'
 
 echo 'Generating things/*.scad files using '$(lein -v)' to '$OUTPUTDIR
 echo '(load-file "src/dactyl_keyboard/dactyl.clj")' | lein repl > /dev/null 2>&1

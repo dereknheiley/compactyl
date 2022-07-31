@@ -1753,7 +1753,7 @@ need to adjust for difference for thumb-z only"
     (->> (screw-insert res -114 0             3 bottom-radius top-radius height [ -6   11    (+ 58.75 hide-top-screws)]) (color NBL)) ; left
     (->> (screw-insert res -120 0       lastrow bottom-radius top-radius height [-27 3  (+ 90 hide-top-screws)]) (color BRO)) ; thumb
     (->> (screw-insert res  145 lastcol       0 bottom-radius top-radius height [ -8    6.25 (+ 12.0  hide-top-screws)]) (color PUR)) ; top right
-    (->> (screw-insert res  -15 0       lastrow bottom-radius top-radius height [ 3.5 -3.5 (+ 56 hide-top-screws)]) (color CYA)) ; bottom thumb
+    (->> (screw-insert res  -15 0       lastrow bottom-radius top-radius height [ 3.5 -4.5 (+ 56 hide-top-screws)]) (color CYA)) ; bottom thumb
     ; (->> (screw-insert res  -23 3       lastrow bottom-radius top-radius height [ -12.5  -4.5 (+ 49 hide-top-screws)]) (color GRE)) ; bottom middle
     (->> (screw-insert res -38 lastcol       3 
                        (if (= res TRIANGLE-RES) (+ 7 bottom-radius) bottom-radius)
@@ -2578,7 +2578,7 @@ need to adjust for difference for thumb-z only"
             (translate [0 0 (- (/ bottom-plate-thickness 2))]
                 (debug model-bottom-plate)
                 (translate [8 -100 (- (/ bottom-plate-thickness 2))] 
-                    (color BRO model-wrist-rest-right-holes)
+                    (color YEL model-wrist-rest-right-holes)
                 )
             )
       )
