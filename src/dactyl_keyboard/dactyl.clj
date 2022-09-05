@@ -68,6 +68,7 @@
 (def use_flex_pcb_holder false) ; optional for flexible PCB, ameobas don't really benefit from this
 (def use_hotswap_holder true)   ; manufactured hotswap holder
 (def use_solderless false)      ; solderless switch plate, RESIN PRINTER RECOMMENDED!
+(def rmtz_solderless_inserts false) ; solderless switch plate, RESIN PRINTER RECOMMENDED!
 
 (def wire-diameter 1.75)        ; outer diameter of silicone covered 22awg ~1.75mm 26awg ~1.47mm)
 (def hotswap-diode-cutout false)
@@ -407,6 +408,107 @@
   )
 )
 
+(def rmtz_plate_cutout
+  (let [hotswap-x3          2
+        hotswap-cutout-1-x-offset (/ holder-x 3.99)
+        hotswap-cutout-3-x-offset (- (/ holder-x 2) (/ hotswap-x3 2.01))
+        hotswap-cutout-3-y-offset 5.5
+        hotswap-cutout-4-x-offset (- (/ hotswap-x3 2.01) (/ holder-x 2))
+        hotswap-cutout-4-y-offset 4.8
+        shape (union
+                ; (translate [0.15 
+                ;             4.6 ; min of all the hotswap-cutout-1-y-offset values
+                ;             hotswap-cutout-z-offset] 
+                ;            (cube (+ keyswitch-width hotswap-case-cutout-x-extra) 
+                ;                  3.8 ; min of all the hotswap-y1 values - 0.4 overhangs
+                ;                  hotswap-z))
+                ; (translate [hotswap-cutout-2-x-offset 
+                ;             3.8 ; min of all the hotswap-cutout-2-y-offset values
+                ;             hotswap-cutout-z-offset]
+                ;            (cube hotswap-x2 
+                ;                  5.7 ; min of all the hotswap-y2 values - 0.4 overhangs
+                ;                  hotswap-z))
+                (->> (cube hotswap-x3 5.9 hotswap-z)
+                                 (translate [ hotswap-cutout-3-x-offset
+                                              hotswap-cutout-3-y-offset
+                                              hotswap-cutout-z-offset])
+                                 ; (color YEL)
+                )
+                (->> (cube hotswap-x3 7.5 hotswap-z)
+                                 (translate [ hotswap-cutout-4-x-offset
+                                              hotswap-cutout-4-y-offset
+                                              hotswap-cutout-z-offset])
+                                 ; (color GRE)
+                            )
+              )
+        rotated
+             (if north_facing
+                 (->> shape
+                      (mirror [1 0 0])
+                      (mirror [0 1 0])
+                 )
+                 shape
+             )
+        ]
+    rotated
+  )
+)
+
+(def rmtz_plate_holder
+  (let [
+        rmtz-holder-x        holder-x
+        rmtz-holder-y        holder-y ; should be less than or equal to holder-y
+        rmtz-holder-z        5; //TODO increase to 6 and fix clip-in-cuts to static height
+        rmtz-holder-offse-x 0
+        rmtz-holder-offset-y (/ (- holder-y rmtz-holder-y) 2)
+        rmtz-holder-offset-z (- (/ rmtz-holder-z 2)) ; the bottom of the hole. 
+        switch_socket_base  (cube rmtz-holder-x 
+                                  rmtz-holder-y 
+                                  rmtz-holder-z)
+
+        switch_socket_base_cutout  (cube (- rmtz-holder-x 2.7)
+                                         (- rmtz-holder-y 2.7)
+                                         (+ rmtz-holder-z 0.1)
+                                   )
+        rmtz-holder-cutout-offset-y (- (/ rmtz-holder-y 2) 1.35)
+        slide_in_cuts (->> (cylinder (/ 1.9 2) (+ rmtz-holder-z 0.1))
+                           (with-fn ROUND-RES))
+
+        rmtz-holder-clip-offset-x (- (/ rmtz-holder-x 2) 1.05)
+        rmtz-holder-clip-offset-y (- (/ rmtz-holder-y 2) 2.7)
+        rmtz-holder-clip-offset-z (- (- rmtz-holder-offset-z) 3)
+        clip_in_cuts (->> (cylinder (/ 2 2) (- rmtz-holder-z 2))
+                           (with-fn ROUND-RES))
+
+        rmtz_plate_holder_shape 
+            (translate [rmtz-holder-offse-x 
+                        rmtz-holder-offset-y
+                        rmtz-holder-offset-z]
+                (difference (union switch_socket_base
+                                   ; (debug slide_in_cuts) ; may have to disable below to appear
+                            )
+                            switch_socket_base_cutout
+                            (translate [ 3.5 (- rmtz-holder-cutout-offset-y) 0 ] slide_in_cuts)
+                            (translate [ 3.5    rmtz-holder-cutout-offset-y  0 ] slide_in_cuts)
+                            (translate [-3.5    rmtz-holder-cutout-offset-y  0 ] slide_in_cuts)
+                            (translate [-3.5 (- rmtz-holder-cutout-offset-y) 0 ] slide_in_cuts)
+
+                            (translate [   rmtz-holder-clip-offset-x (- rmtz-holder-clip-offset-y)  rmtz-holder-clip-offset-z ] clip_in_cuts)
+                            (translate [   rmtz-holder-clip-offset-x     rmtz-holder-clip-offset-y  rmtz-holder-clip-offset-z ] clip_in_cuts)
+                            (translate [(- rmtz-holder-clip-offset-x)    rmtz-holder-clip-offset-y  rmtz-holder-clip-offset-z ] clip_in_cuts)
+                            (translate [(- rmtz-holder-clip-offset-x) (- rmtz-holder-clip-offset-y) rmtz-holder-clip-offset-z ] clip_in_cuts)
+            ))
+       ]
+       (if north_facing
+           (->> rmtz_plate_holder_shape
+                (mirror [1 0 0])
+                (mirror [0 1 0])
+           )
+           rmtz_plate_holder_shape
+       )
+  )
+)
+
 (def gateron-hotswap-holder
   (make-hotswap-holder 4.5  ;hotswap-y1
                        4.55 ;hotswap-cutout-1-y-offset
@@ -674,6 +776,7 @@
                                        "gateron-hotswap" gateron-hotswap-holder
                                        "outemu-hotswap"  outemu-hotswap-holder))
                   (if use_solderless solderless-plate)
+                  (if rmtz_solderless_inserts rmtz_plate_holder)
               )
        ]
     (->> (if mirror-internals
@@ -702,6 +805,7 @@
                                   mount-height 
                                   hotswap-z)))
         (if use_solderless (hull solderless-plate))
+        (if rmtz_solderless_inserts rmtz_plate_cutout)
     )
 )
 
@@ -2247,6 +2351,26 @@ need to adjust for difference for thumb-z only"
                                     ) 
                                   ))
 
+(def rmtz_sockets
+    (key-places 
+        (if north_facing
+           (->> (import "../things/rmtz-Socket14-SocketMX.stl")
+                (mirror [1 0 0])
+                (mirror [0 1 0])
+           )
+           (import "../things/rmtz-Socket14-SocketMX.stl")
+        )))
+
+(def rmtz_sockets_thumb
+    (thumb-layout 
+        (if north_facing
+           (->> (import "../things/rmtz-Socket14-SocketMX.stl")
+                (mirror [1 0 0])
+                (mirror [0 1 0])
+           )
+           (import "../things/rmtz-Socket14-SocketMX.stl")
+        )))
+
 ;;;;;;;;;;;;
 ;; Models ;;
 ;;;;;;;;;;;;
@@ -2379,7 +2503,7 @@ need to adjust for difference for thumb-z only"
     (if (not (or use_hotswap_holder use_solderless)) 
         (union key-space-below
               thumb-space-below))
-    (if use_hotswap_holder (thumb-layout (hotswap-case-cutout mirror-internals)))
+    (if (or use_hotswap_holder rmtz_solderless_inserts) (thumb-layout (hotswap-case-cutout mirror-internals)))
   )
   ; (debug top-screw))
 )
@@ -2399,11 +2523,12 @@ need to adjust for difference for thumb-z only"
     caps-cutout
     thumbcaps-cutout
     (thumb-key-cutouts mirror-internals)
-    (if (not (or use_hotswap_holder use_solderless)) 
+    (if (not (or use_hotswap_holder use_solderless rmtz_solderless_inserts)) 
         (union key-space-below
               thumb-space-below))
     (if use_hotswap_holder (thumb-layout (hotswap-case-cutout mirror-internals)))
     (if use_hotswap_holder (key-places (hotswap-case-cutout mirror-internals)))
+    (if rmtz_solderless_inserts rmtz_plate_cutout)
   )
 )
 
@@ -2447,11 +2572,13 @@ need to adjust for difference for thumb-z only"
     caps-cutout
     thumbcaps-cutout
     (thumb-key-cutouts mirror-internals)
-    (if (not (or use_hotswap_holder use_solderless)) 
+    (if (not (or use_hotswap_holder use_solderless rmtz_solderless_inserts)) 
         (union key-space-below
                thumb-space-below))
     (if use_hotswap_holder (thumb-layout (hotswap-case-cutout mirror-internals)))
     (if use_hotswap_holder (key-places (hotswap-case-cutout mirror-internals)))
+    (if rmtz_solderless_inserts (thumb-layout rmtz_plate_cutout))
+    (if rmtz_solderless_inserts (key-places rmtz_plate_cutout))
   ))
 
 ;;;;;;;;;;;;;
@@ -2459,7 +2586,12 @@ need to adjust for difference for thumb-z only"
 ;;;;;;;;;;;;;
 
 (spit "things/single-plate.scad"
-      (write-scad (single-plate false)))
+        (write-scad (union (single-plate false)
+                           (if rmtz_solderless_inserts (debug (import "../things/rmtz-Socket14-SocketMX.stl")))
+                           (if rmtz_solderless_inserts (translate [0 0 -2.5] (color RED (import "../things/rmtz-FloorInsert-FloorInsert.stl"))))
+                    )
+    )
+)
 
 (spit "things/test-print-hotswap-switch-openings.scad"
       (write-scad
@@ -2520,7 +2652,7 @@ need to adjust for difference for thumb-z only"
 ;             ; caps-cutout
 ;             thumbcaps-cutout
 ;             (thumb-key-cutouts false)
-;             (if (not (or use_hotswap_holder use_solderless))
+;             (if (not (or use_hotswap_holder use_solderless rmtz_solderless_inserts ))
 ;                 thumb-space-below)
 ;             (if use_hotswap_holder (thumb-layout (hotswap-case-cutout false)))
 ;         )))
@@ -2570,6 +2702,9 @@ need to adjust for difference for thumb-z only"
             (color YEL
                 (model-switch-plates-right false)
             )
+
+            ; (if rmtz_solderless_inserts (debug rmtz_sockets))
+            ; (if rmtz_solderless_inserts (debug rmtz_sockets_thumb))
 
             ; (debug top-screw)
             ; (color D_BLA (import "../things/v5caps.stl"))
