@@ -6,10 +6,11 @@
 
 .lein-*
 *.gcode
+*.3mf
+*.ctb
+*.idea
 *.scad
 /target
-*.stl
 *.ai
-*.svg
 /.idea/
 /dactyl-manuform-mini-keyboard.iml
