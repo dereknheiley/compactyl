@@ -2096,11 +2096,11 @@ need to adjust for difference for thumb-z only"
 
 ; begin heavily modified crystalhand wrist rest code
 (def wrist-rest-x-angle 16)
-(def wrist-rest-y-angle-adj -7)   ; additional tenting angle for wrist rest
-(def wrist-rest-z-height-adj 28) ; additional z height for wrist rest
+(def wrist-rest-y-angle-adj 0)   ; additional tenting angle for wrist rest
+(def wrist-rest-z-height-adj 34) ; additional z height for wrist rest
 
 ;magic numbers to tweak how well the gel wrist rest is held
-(def wrist-rest-recess-depth 4)
+(def wrist-rest-recess-depth 4.5)
 (def wrist-rest-recess-x-scale 4.25)
 (def wrist-rest-recess-y-scale 4.33)
 
