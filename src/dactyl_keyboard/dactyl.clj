@@ -77,6 +77,10 @@
 (keyword "outemu-hotswap")
 (def hotswap-type "gateron-hotswap")
 
+(keyword "heart-rest")
+(keyword "moon-rest")
+(def palm-rest-type "moon-rest")
+
 (def controller-holder 2) ; 1=printed usb-holder; 2=pcb-holder
 (def north_facing true)
 (def extra-height-top-row true) ; raise numrow for mt3 and oem keycap profiles to match SA R1 num key height
@@ -2092,7 +2096,7 @@ need to adjust for difference for thumb-z only"
 
 ; begin heavily modified crystalhand wrist rest code
 (def wrist-rest-x-angle 16)
-(def wrist-rest-y-angle-adj 0)   ; additional tenting angle for wrist rest
+(def wrist-rest-y-angle-adj -7)   ; additional tenting angle for wrist rest
 (def wrist-rest-z-height-adj 28) ; additional z height for wrist rest
 
 ;magic numbers to tweak how well the gel wrist rest is held
@@ -2101,7 +2105,8 @@ need to adjust for difference for thumb-z only"
 (def wrist-rest-recess-y-scale 4.33)
 
 (def wrirst-rest-base-zheight (* 2.01 wrist-rest-recess-depth))
-(def wrist-rest-right-base
+
+(def wrist-rest-right-base-heart
     (let [
           wrist-rest-cut-bottom (translate [0 0 -150]
                                     (cube 300 300 300))
@@ -2152,6 +2157,19 @@ need to adjust for difference for thumb-z only"
     )
 )
 
+(def wrist-rest-right-base-moon
+    (let [
+          moon (->> (import "moon-palm-rest.svg")
+                    (scale [0.745, 0.75, 1]) ; no idea why i have to scale down SVG vs dxf, i blame RealIT
+                    (extrude-linear { :height (/ wrirst-rest-base-zheight 2) })
+                    (translate [0 -10.5 (/ wrirst-rest-base-zheight 4)])
+                    (color NBL)
+               )
+        ]
+        moon
+    )
+)
+
 (defn wrist-rest-angler [shape]
     (let [wrist-rest-y-angle (* tenting-angle 45)
           angled-shape (->> shape
@@ -2168,23 +2186,28 @@ need to adjust for difference for thumb-z only"
 
 (def wrist-rest-right
     (let [
-           outline (scale [1.08 1.08 1] 
+           wrist-rest-right-base (case palm-rest-type "heart-rest" wrist-rest-right-base-heart
+                                                      "moon-rest"  wrist-rest-right-base-moon)
+           base-outline (scale [1.08 1.08 1] 
                        wrist-rest-right-base
                    )
-           recess-cut (translate [0 0 (- (/ wrirst-rest-base-zheight 2)
-                                   wrist-rest-recess-depth)]
-                    wrist-rest-right-base
-                )
+           recess-cut (translate [0
+                                  0
+                                  (- (/ wrirst-rest-base-zheight 2)
+                                     wrist-rest-recess-depth)]
+                          wrist-rest-right-base
+                      )
            top (difference
-                   outline
+                   base-outline
                    recess-cut
                )
            top-angled (wrist-rest-angler top)
            base  (translate [0 0 150]
-                     (extrude-linear { :height 300 } 
+                     (extrude-linear { :height 300 }
                          (project 
-                             (scale [0.999 0.999 1] 
-                                 top-angled)
+                             (wrist-rest-angler
+                                 (scale [0.9999 0.9999 1] top)
+                             )
                          )
                      )
                  )
@@ -2197,7 +2220,7 @@ need to adjust for difference for thumb-z only"
          ]
          (union top-angled
                 base-trimmed
-                ; (debug thingy)
+                ; (debug base-cut)
          )
     )
 )
@@ -2524,8 +2547,11 @@ need to adjust for difference for thumb-z only"
 (spit "things/bottom-plate-left.scad"
       (write-scad (mirror [-1 0 0] model-bottom-plate)))
 
-; (spit "things/wrist-rest-right-base.scad"
-;       (write-scad wrist-rest-right-base))
+; (spit "things/wrist-rest-right-base-heart.scad"
+;       (write-scad wrist-rest-right-base-heart))
+; (spit "things/wrist-rest-right-base-moon.scad"
+;       (write-scad wrist-rest-right-base-moon
+;      ))
 (spit "things/wrist-rest-right-holes.scad"
   (if adjustable-wrist-rest-holder-plate
     (write-scad model-wrist-rest-right-holes)

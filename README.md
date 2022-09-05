@@ -4,9 +4,13 @@ This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manufor
 
 ## Future TODOs
 - TODO add ready to print risers with slots to increase palm rest height
-- TODO confirm bastardkb mcu holder is compatible with blackpill version as well
+- TODO make super hollow adjustable angle hyper-awesome palm rest
+- Take over the world
 
 ## V6.0 (IN PROGRESS) Features
+- TODO confirm bastardkb mcu holder is compatible with blackpill version as well
+- add support for both types of gel palm rests
+![Moon vs. Heart palm rest](images/moon-vs-heart.jpg)
 - adjust thumb height/angle and curvature
 ![Compactyl V6.0 preview](images/compactyl-v6.png)
 
