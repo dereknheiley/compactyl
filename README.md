@@ -3,12 +3,13 @@
 This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manuform-tight) of the [l4u fork](https://github.com/l4u/dactyl-manuform-mini-keyboard) of the [tshort fork](https://github.com/tshort/dactyl-keyboard) of the [Dactyl](https://github.com/adereth/dactyl-keyboard), a parameterized, split-hand, concave, columnar, ergonomic keyboard.
 
 ## Future TODOs
+- TODO Change Top and bottom plate connection such that the underside of the top angles in for a cleaner connection for FDM printing. In other words hide ugly underside edge of top plate which 3d printing generally sucks at
+- TODO confirm bastardkb mcu holder is compatible with blackpill version as well (screw holes need to move backwards?)
 - TODO add ready to print risers with slots to increase palm rest height
 - TODO make super hollow adjustable angle hyper-awesome palm rest
 - Take over the world
 
 ## V6.0 (IN PROGRESS) Features
-- TODO confirm bastardkb mcu holder is compatible with blackpill version as well
 - add support for both types of gel palm rests
 ![Moon vs. Heart palm rest](images/moon-vs-heart.jpg)
 - adjust thumb height/angle and curvature
@@ -22,7 +23,7 @@ This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manufor
 	- Adjust column heights, ring finger lower on Z, middle and index columns higher on Z
 	- Increase curvature of pinky column to bring bottom alpha and num row closer to finger
 	- Add option to raise numrow slightly along Z axis
-- Add option to support kailh, gateron, and outemu hot swap socket shapes. Tweak kailh cutout, and change to gateron version.
+- Add option to support kailh, gateron, and outemu hot swap socket shapes. Tweak kailh cutout, and change STLs to gateron version.
 ![Compactyl V5.0 preview](images/compactyl-v5.png)
 
 ## V4.1 Features
