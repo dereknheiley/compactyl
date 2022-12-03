@@ -1,4 +1,4 @@
-# Compactyl - A Compact Dactyl ManuForm Keyboard
+# Compactyl - A Compact Dactyl ~~ManuForm~~ Ergo Keyboard
 
 This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manuform-tight) of the [l4u fork](https://github.com/l4u/dactyl-manuform-mini-keyboard) of the [tshort fork](https://github.com/tshort/dactyl-keyboard) of the [Dactyl](https://github.com/adereth/dactyl-keyboard), a parameterized, split-hand, concave, columnar, ergonomic keyboard.
 
@@ -10,10 +10,10 @@ This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manufor
 - Take over the world
 
 ## V6.0 (IN PROGRESS) Features
+- adjust thumb height/angle and curvature from downward facing "dactyl manuform" style to more "original dactyl" angle so that outer keys are easier to reach
+![Compactyl V6.0 preview](images/compactyl-v6.png)
 - add support for both types of gel palm rests
 ![Moon vs. Heart palm rest](images/moon-vs-heart.jpg)
-- adjust thumb height/angle and curvature
-![Compactyl V6.0 preview](images/compactyl-v6.png)
 
 ## V5.0 Features
 - Added fourth thumb key
