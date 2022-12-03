@@ -124,6 +124,17 @@ This is a fork of the [okke fork](https://github.com/okke-formsma/dactyl-manufor
 ![](images/compactyl_dactyl_manuform_wiring_right.jpeg)
 ![](images/compactyl-real-4x6-wiring.jpeg)
 
+## BOM - Bill of Materials
+- heat set inserts for attaching top plate to case [M2.5 x D3.5 x L4.5](https://www.aliexpress.com/item/1005002072644387.html?spm=a2g0o.order_list.order_list_main.5.39421802lmlEGt)
+- heat set inserts for attaching bottom plate and plam rest [M3 x D4.6 x L7.0](https://www.aliexpress.com/item/4000232858343.html?spm=a2g0o.order_list.order_list_main.10.39421802lmlEGt)
+- staineless steel button head screws: [M2.5 in L8,10,12,16,20mm](https://www.aliexpress.com/item/32877100491.html?spm=a2g0o.order_detail.order_detail_item.7.64b1f19coxrYJp)
+- stainelss steel tapered head screws: [M3 in L8mm](https://www.aliexpress.com/item/32876316887.html?spm=a2g0o.store_pc_allProduct.8148356.45.7e2f784fUMiRfg&pdp_npi=2%40dis%21CAD%21C%24%205.08%21C%24%204.06%21C%24%204.02%21%21%21%21%402100bdd816700231192517731efded%2110000002787559476%21sh) maybe a better price from [another seller](https://www.aliexpress.com/item/32968097507.html?spm=a2g0o.order_list.0.0.21ef1802iqM3Ok&gps-id=pcOrderListRecommend&scm=1007.38956.276740.0&scm_id=1007.38956.276740.0&scm-url=1007.38956.276740.0&pvid=031cc8e6-f9f1-4c6e-bede-f1d04f623a08&_t=gps-id:pcOrderListRecommend,scm-url:1007.38956.276740.0,pvid:031cc8e6-f9f1-4c6e-bede-f1d04f623a08,tpp_buckets:668%232846%238110%231995&pdp_ext_f=%7B%22sku_id%22%3A%2266576783748%22%2C%22sceneId%22%3A%2228956%22%7D&pdp_npi=2%40dis%21CAD%211.22%210.99%210.98%21%21%21%21%402101f6b216700233323926926e90ce%2166576783748%21rec)
+- reset button [for printed MCU holder](https://www.aliexpress.com/item/32866978214.html?spm=a2g0o.order_list.order_list_main.30.21ef1802iqM3Ok)
+- reset button [for bastard MCU adapter](https://www.aliexpress.com/item/1005001739975290.html?spm=a2g0o.order_list.order_list_main.11.21ef1802iqM3Ok)
+- [3.5mm TRRS jack](https://www.aliexpress.com/item/33029465106.html?spm=a2g0o.order_list.order_list_main.40.21ef1802iqM3Ok)
+- generic [3.5mm TRRS cables](https://www.aliexpress.com/item/4000104350398.html?spm=a2g0o.order_list.order_list_main.34.21ef1802iqM3Ok)
+
+
 ## Tools & Supplies [Full amazon wish list of equipment](https://www.amazon.ca/hz/wishlist/ls/18NL4T59KM4AE?ref_=wl_share)
 - Soldering iron & stand, at least 50 watt
 - No clean lead free solder in 21awg, or 25awg for smaller SMD components [lead solder is easier to flow, but be careful](https://www.wellpcb.com/lead-free-solder-vs-lead-solder.html)
